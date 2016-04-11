@@ -3,8 +3,11 @@ Educational application for practicing basic arithmetic, developed as a part of 
 
 Framework and technologies used:
   - ASP.NET Core 1 (WebAPI) 
-  - AngularJS
-  - MongoDB
   - Auth0
+  - MongoDB
+  - AngularJS 
+  - LumX
+  
+  
   
   
