@@ -1,0 +1,27 @@
+﻿{
+  "version": "1.0.0-*",
+  "description": "FourtyTwo.Tests Console Application",
+  "authors": [ "Valer Orlovsky" ],
+  "tags": [ "" ],
+  "projectUrl": "",
+  "licenseUrl": "",
+
+  "compilationOptions": {
+    "emitEntryPoint": true
+  },
+
+  "dependencies": {
+    "FourtyTwo": "",
+    "nunit": "3.2.0",
+    "NUnitLite": "3.2.0-*",
+    "FluentAssertions": "4.3.0"
+  },
+
+  "commands": {
+    "test": "FourtyTwo.Tests"
+  },
+
+  "frameworks": {
+    "dnx451": { }
+  }
+}

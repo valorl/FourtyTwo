@@ -10,10 +10,11 @@ namespace FourtyTwo.API.Models
     {
         public List<int> Numbers { get; set; }
         public Operation Operation { get; set; }
+        public int Answer { get; set; }
 
         public Question()
         {
-
+            Numbers = new List<int>();
         }
     }
 }

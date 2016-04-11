@@ -8,6 +8,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using FourtyTwo.API.Repositories;
+using Microsoft.Extensions.OptionsModel;
+using FourtyTwo.Properties;
+using Microsoft.AspNet.Authentication.JwtBearer;
+using System.Security.Claims;
 
 namespace FourtyTwo
 {
@@ -17,7 +21,7 @@ namespace FourtyTwo
         {
             // Set up configuration sources.
             var builder = new ConfigurationBuilder()
-                .AddJsonFile("API/appsettings.json")
+                .AddJsonFile("apiconfig.json")
                 .AddUserSecrets()
                 .AddEnvironmentVariables();
             Configuration = builder.Build();
@@ -31,6 +35,8 @@ namespace FourtyTwo
             // Add framework services.
             services.AddSingleton<IMongoDatabaseProvider>(provider =>
                 new MongoDatabaseProvider(Configuration["MongoDB:ConnectionString"],Configuration["MongoDB:Database"]));
+            services.AddScoped<IExerciseRepository, ExerciseRepository>();
+            services.Configure<Auth0Settings>(Configuration.GetSection("Auth0"));
             services.AddMvc();
         }
 
@@ -39,6 +45,43 @@ namespace FourtyTwo
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
+
+            // Auth 0 configuration
+            var auth0logger = loggerFactory.CreateLogger("Auth0");
+            var auth0settings = app.ApplicationServices.GetService<IOptions<Auth0Settings>>();
+
+            app.UseJwtBearerAuthentication(options => 
+            {
+                options.Audience = auth0settings.Value.ClientId;
+                options.Authority = $"https://{auth0settings.Value.Domain}";
+                options.Events = new JwtBearerEvents
+                {
+                    OnAuthenticationFailed = context =>
+                    {
+                        auth0logger.LogError("Auth0 failed to authenticate.", context.Exception);
+                        return Task.FromResult(0);
+                    },
+                    OnValidatedToken = context =>
+                    {
+                        var claimsIdentity = context.AuthenticationTicket.Principal.Identity as ClaimsIdentity;
+
+                        // Add id_token from Authorization header (Bearer <id_token>)
+                        claimsIdentity.AddClaim(new Claim("id_token",
+                            context.Request.Headers["Authorization"][0].Substring(context.AuthenticationTicket.AuthenticationScheme.Length +1)));
+                        // Add user_id claim - has to be requested in the scope to receive it in the JWT token
+                        // Slice first 6 characters "auth|0"
+                        claimsIdentity.AddClaim(new Claim(ClaimTypes.NameIdentifier, claimsIdentity.FindFirst("user_id").Value.Substring(5)));
+
+                        return Task.FromResult(0);
+                    }
+                };
+
+            });
+
+
+
+
+
 
             app.UseIISPlatformHandler();
 

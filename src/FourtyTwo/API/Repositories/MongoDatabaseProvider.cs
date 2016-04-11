@@ -15,6 +15,14 @@ namespace FourtyTwo.API.Repositories
         public MongoDatabaseProvider(string connectionString, string databaseName)
         {
             Database = new MongoClient(connectionString).GetDatabase(databaseName);
+            SetIndex();
+        }
+
+        private void SetIndex()
+        {
+            var exCollection = Database.GetCollection<BsonDocument>("Exercises");
+            var keys = Builders<BsonDocument>.IndexKeys.Ascending("UserId");
+            exCollection.Indexes.CreateOne(keys);
         }
     }
 }

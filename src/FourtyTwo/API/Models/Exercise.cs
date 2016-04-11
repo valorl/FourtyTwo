@@ -26,7 +26,7 @@ namespace FourtyTwo.API.Models
 
         public Exercise()
         {
-                
+            Questions = new List<Question>();
         }
     }
 }

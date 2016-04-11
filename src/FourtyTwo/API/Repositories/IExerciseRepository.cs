@@ -6,11 +6,11 @@ using FourtyTwo.API.Models;
 
 namespace FourtyTwo.API.Repositories
 {
-    interface IExerciseRepository
+    public interface IExerciseRepository
     {
         Task<Exercise> FindOneAsync(string _id);
         Task<IEnumerable<Exercise>> FindManyAsync(string user_id);
-        Task InsertOneAsync(Exercise model);
+        Task<Exercise> InsertOneAsync(Exercise model);
 
     }
 }

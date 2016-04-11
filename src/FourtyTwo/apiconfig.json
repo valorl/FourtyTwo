@@ -1,4 +1,8 @@
 ﻿{
+  "Auth0": {
+    "ClientId": "wHujUxG1opUJsGK7lxTU2MCoOSumzrdH",
+    "Domain": "valorl.eu.auth0.com"
+  },
   "MongoDB": {
     "Host": "127.0.0.1",
     "Port": 27017,

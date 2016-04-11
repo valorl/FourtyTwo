@@ -30,9 +30,10 @@ namespace FourtyTwo.API.Repositories
             return exercises;
         }
 
-        public async Task InsertOneAsync(Exercise model)
+        public async Task<Exercise> InsertOneAsync(Exercise model)
         {
             await _collection.InsertOneAsync(model);
+            return model;
         }
     }
 }
