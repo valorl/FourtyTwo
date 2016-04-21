@@ -10,4 +10,4 @@ install:
   - dnvm upgrade
   - dnu restore
 script:
-  - cd src/FourtyTwo/ && dnu build
+  - cd FourtyTwo.Api/src/FourtyTwo/ && dnu build
