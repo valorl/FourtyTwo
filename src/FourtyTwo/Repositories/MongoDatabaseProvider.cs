@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 
-namespace FourtyTwo.API.Repositories
+namespace FourtyTwo.Repositories
 {
     public class MongoDatabaseProvider : IMongoDatabaseProvider
     {

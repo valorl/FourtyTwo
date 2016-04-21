@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using FourtyTwo.API.Models;
+using FourtyTwo.Models;
 
-namespace FourtyTwo.API.Repositories
+namespace FourtyTwo.Repositories
 {
     public interface IExerciseRepository
     {

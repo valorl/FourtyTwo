@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace FourtyTwo.API.Models
+namespace FourtyTwo.Models
 {
     public class Exercise
     {

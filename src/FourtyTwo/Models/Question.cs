@@ -1,10 +1,10 @@
-﻿using FourtyTwo.API.Models.Enums;
+﻿using FourtyTwo.Models.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace FourtyTwo.API.Models
+namespace FourtyTwo.Models
 {
     public class Question
     {

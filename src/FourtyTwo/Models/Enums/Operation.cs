@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace FourtyTwo.API.Models.Enums
+namespace FourtyTwo.Models.Enums
 {
     public enum Operation
     {

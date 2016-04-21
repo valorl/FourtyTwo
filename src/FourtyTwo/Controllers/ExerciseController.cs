@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Mvc;
-using FourtyTwo.API.Models;
+using FourtyTwo.Models;
 using Microsoft.AspNet.Authorization;
-using FourtyTwo.API.Repositories;
+using FourtyTwo.Repositories;
 using System.Security.Claims;
-using FourtyTwo.API.Models.Enums;
+using FourtyTwo.Models.Enums;
 
-namespace FourtyTwo.API.Controllers
+namespace FourtyTwo.Controllers
 {
     [Route("v1/api/exercises/")]
     [Authorize(ActiveAuthenticationSchemes = "Bearer")]

@@ -7,7 +7,7 @@ using Microsoft.AspNet.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using FourtyTwo.API.Repositories;
+using FourtyTwo.Repositories;
 using Microsoft.Extensions.OptionsModel;
 using FourtyTwo.Properties;
 using Microsoft.AspNet.Authentication.JwtBearer;
