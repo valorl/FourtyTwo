@@ -6,8 +6,9 @@ branches:
 mono:
   - latest
 install:
+  - cd FourtyTwo.Api
   - curl -sSL https://raw.githubusercontent.com/aspnet/Home/dev/dnvminstall.sh | DNX_BRANCH=dev sh && source ~/.dnx/dnvm/dnvm.sh
   - dnvm upgrade
   - dnu restore
 script:
-  - cd FourtyTwo.Api/src/FourtyTwo/ && dnu build
+  - cd src/FourtyTwo/ && dnu build
