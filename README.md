@@ -5,8 +5,10 @@ Framework and technologies used:
   - ASP.NET Core 1 (WebAPI) 
   - Auth0
   - MongoDB
-  - AngularJS 
-  - LumX
+  - ReactJS
+  - Redux
+  - Material UI
+  - Bootstrap
   
   
   
