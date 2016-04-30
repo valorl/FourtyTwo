@@ -1,0 +1,31 @@
+$headerBgColor: #66BB6A;
+@import 'auth0lock';
+
+
+.login-header {
+	// margin-top: 15em;
+	position: relative;
+	top: 50%;
+	transform: translateY(+50%);
+	background-color: $headerBgColor;
+	color: white;
+	height: 400px;
+	margin-bottom:30px;
+	vertical-align: middle;
+	text-align: right;
+	padding-top: 80px;
+	
+	.heading-wrapper {
+		padding-top: 60px;
+	}
+
+	h2 {
+		margin: 0;
+		font-size: 4em;
+		font-family: 'Comfortaa', cursive;
+		font-weight: bold;
+	}
+	p {
+		font-size: 1.75em;
+	}
+}
