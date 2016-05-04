@@ -76,14 +76,17 @@ class QuestionPanel extends React.Component {
 
   	let { inputValue, currentQuestion, answeredQuestions} = this.state;
   	currentQuestion.answer = parseInt(inputValue);
+
+    this.props.handleStoreQuestion(currentQuestion);
+    
     if(currentQuestion.answer) {
       this.setState({ 
       currentQuestion: this.generateQuestion(),
       inputValue: '',
-      answeredQuestions: [...answeredQuestions, currentQuestion]
       });
     }
-  	
+
+
   	
   	// this.setState({ inputValue: 'refreshed' + math.randomInt(5)});
   }
