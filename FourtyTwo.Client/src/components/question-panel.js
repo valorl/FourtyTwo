@@ -3,8 +3,8 @@ import Paper from 'material-ui/lib/paper';
 import TextField from 'material-ui/lib/text-field';
 import RaisedButton from 'material-ui/lib/raised-button';
 
+import Play42 from '../utils/play42-helper.js';
 
-import math from 'mathjs';
 
 class QuestionPanel extends React.Component {
 
@@ -19,8 +19,6 @@ class QuestionPanel extends React.Component {
   componentWillMount() {
   	this.setState({
       inputValue: '',
-  		answeredQuestions: [],
-  		currentQuestion: this.generateQuestion()
   	});
 
   	this.styles = {
@@ -76,12 +74,13 @@ class QuestionPanel extends React.Component {
 
   	let { inputValue, currentQuestion, answeredQuestions} = this.state;
   	currentQuestion.answer = parseInt(inputValue);
-
+    console.log('Calling handleStoreQuestion from handleAnswerSubmitted with:');
+    console.log(currentQuestion);
     this.props.handleStoreQuestion(currentQuestion);
-    
+
     if(currentQuestion.answer) {
       this.setState({ 
-      currentQuestion: this.generateQuestion(),
+      currentQuestion: Play42.randomQuestion(),
       inputValue: '',
       });
     }
@@ -98,6 +97,17 @@ class QuestionPanel extends React.Component {
     }
     else return false;
   }
+
+  // Generate first question
+  start() {
+    this.setState({
+      currentQuestion: Play42.randomQuestion()
+    });
+  }
+
+  setTextFieldFocus() {
+    this.refs.TextField.focus();
+  }
   
   render() {
   	const { currentQuestion } = this.state;
@@ -106,22 +116,24 @@ class QuestionPanel extends React.Component {
       	<div className="question-panel-container">
       		<Paper style={this.styles.mainPaper} zDepth={1}>
   	    		<div>
-  		    		<div className="question-expression">
-  	    				<span className="question-number">{currentQuestion.n1}</span>
-  	    				<span className="question-operation"> {currentQuestion.operation.sign} </span>
-  	    				<span className="question-operation">{currentQuestion.n2}</span>
-  	    			</div>
+              <div className="question-expression">
+                <span className="question-number">{currentQuestion ? currentQuestion.n1 : '..4'}</span>
+                <span className="question-operation"> {currentQuestion ? currentQuestion.operation.sign : '.'} </span>
+                <span className="question-number">{currentQuestion ? currentQuestion.n2 : '2..'}</span>
+              </div>
               <form onSubmit={this.handleAnswerSubmitted}>
                 <TextField 
-                  autoFocus
+                  ref="TextField"
                   style={this.styles.textField} 
-                  inputStyle={this.styles.textFieldInput} 
+                  inputStyle={this.styles.textFieldInput}
                   hintStyle={this.styles.textFieldHint}
                   hintText="Answer here" 
                   value={this.state.inputValue} 
-                  onChange={this.handleInputChanged}/>
+                  onChange={this.handleInputChanged}
+                  autoComplete="off"/>
               {/*<RaisedButton label="Answer" labelColor="white" backgroundColor="#66BB6A"/>*/}
               </form>
+
   	    		</div>
       			
       		</Paper>

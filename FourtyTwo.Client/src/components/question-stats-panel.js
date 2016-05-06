@@ -66,10 +66,30 @@ class QuestionStatsPanel extends React.Component {
               </tbody>
             </table>*/}
             <List>
-              <ListItem   style={this.styles.listItem} primaryText={this.props.timeLeft || '00:15'} leftIcon={<ScheduleIcon style={this.styles.icon} color={Colors.blueGrey700}/>}/>
-              <ListItem style={this.styles.listItem} primaryText={this.props.answeredCount || '15'} leftIcon={<CompletedIcon style={this.styles.icon} color={Colors.blue700}/>}/>
-              <ListItem style={this.styles.listItem} primaryText={this.props.incorrectCount || '5'} leftIcon={<IncorrectIcon style={this.styles.icon} color={Colors.red700}/>}/>
-              <ListItem style={this.styles.listItem} primaryText={this.props.accuracy || '33%'} leftIcon={<AccuracyIcon style={this.styles.icon} color={Colors.blueGrey700}/>}/>
+              <ListItem 
+                style={this.styles.listItem} 
+                primaryText={`${this.props.timeLeft.minutes}:${this.props.timeLeft.seconds}`} 
+                leftIcon={
+                  <ScheduleIcon style={this.styles.icon} color={Colors.blueGrey700}/>
+                } />
+              <ListItem 
+                style={this.styles.listItem} 
+                primaryText={String(this.props.answeredCount)} 
+                leftIcon={
+                  <CompletedIcon style={this.styles.icon} color={Colors.blue700}/>
+                } />
+              <ListItem 
+                style={this.styles.listItem} 
+                primaryText={String(this.props.incorrectCount)} 
+                leftIcon={
+                  <IncorrectIcon style={this.styles.icon}color={Colors.red700}/>
+                } />
+              <ListItem 
+                style={this.styles.listItem} 
+                primaryText={(this.props.accuracy > -1 ? this.props.accuracy + '%' : 'N/A') } 
+                leftIcon={
+                  <AccuracyIcon style={this.styles.icon} color={Colors.blueGrey700}/>
+                } />
             </List>
       		</Paper>
       	</div>
