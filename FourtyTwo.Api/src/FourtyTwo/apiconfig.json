@@ -8,7 +8,6 @@
     "Port": 27017,
     "Database": "vo_FourtyTwo",
     "ConnectionString": "mongodb://localhost"
-
   },
   "Logging": {
     "IncludeScopes": false,

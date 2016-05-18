@@ -86,7 +86,7 @@ class QuestionStatsPanel extends React.Component {
                 } />
               <ListItem 
                 style={this.styles.listItem} 
-                primaryText={(this.props.accuracy > -1 ? this.props.accuracy + '%' : 'N/A') } 
+                primaryText={(this.props.accuracy > -1 ? this.props.accuracy + '%' : '-') } 
                 leftIcon={
                   <AccuracyIcon style={this.styles.icon} color={Colors.blueGrey700}/>
                 } />

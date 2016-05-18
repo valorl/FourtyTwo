@@ -26,10 +26,10 @@ namespace FourtyTwo.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var user_id = GetUserId(User);
-            if (user_id == null) return HttpUnauthorized();
+            var userId = User.Identity.Name;
+            if (userId == null) return HttpUnauthorized();
 
-            var userExercises = await _repository.FindManyAsync(user_id);
+            var userExercises = await _repository.FindManyAsync(userId);
             if (userExercises == null || userExercises.ToList().Count < 1) return HttpNotFound();
 
             return Ok(userExercises);
@@ -39,8 +39,8 @@ namespace FourtyTwo.Controllers
         [HttpGet("{id}", Name = "GetByExerciseId")]
         public async Task<IActionResult> Get(string id)
         {
-            var user_id = GetUserId(User);
-            if (user_id == null) return HttpUnauthorized();
+            var userId = User.Identity.Name;
+            if (userId == null) return HttpUnauthorized();
 
             var userExercise = await _repository.FindOneAsync(id);
             if (userExercise == null) return HttpNotFound();
@@ -68,8 +68,11 @@ namespace FourtyTwo.Controllers
             //    },
             //};
 
-            var user_id = GetUserId(User);
-            if (user_id == null) return HttpUnauthorized();
+            var userId = User.Identity.Name;
+            if (userId == null) return HttpUnauthorized();
+            var user = User;
+
+            exercise.UserId = userId;
 
             await _repository.InsertOneAsync(exercise);
             return CreatedAtRoute("GetByExerciseId", new { id = exercise._id }, exercise);
@@ -87,13 +90,5 @@ namespace FourtyTwo.Controllers
         {
         }
 
-
-
-        //private
-        private string GetUserId(ClaimsPrincipal user)
-        {
-            var user_id = User.Claims.First(claim => claim.Type == "user_id").Value.Substring(6);
-            return user_id;
-        }
     }
 }

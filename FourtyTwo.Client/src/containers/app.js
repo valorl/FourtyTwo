@@ -1,30 +1,30 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { browserHistory } from 'react-router';
 
 import Auth0Lock from 'auth0-lock';
 
-
-import Login from '../components/login';
+import Authorized from './authorized';
 
 class App extends React.Component {
 
 	componentWillMount() {
-		this.lock = new Auth0Lock('wHujUxG1opUJsGK7lxTU2MCoOSumzrdH', 'valorl.eu.auth0.com');
-		console.log(this.lock);
-
-		this.setState({idToken: this.getIdToken()});
+		let redirect = '';
+		this.props.authorized ? redirect = '/app' :  redirect = '/login';
+		browserHistory.push(redirect);
 	}
 
 
 	getIdToken() {
-		var idToken = localStorage.getItem('userToken');
+		var idToken = localStorage.getItem('id_token');
 		var authHash = this.lock.parseHash(window.location.hash);
 		console.log(authHash);
 		if (!idToken && authHash) {
 			if (authHash.id_token) {
 				idToken = authHash.id_token
-				localStorage.setItem('userToken', authHash.id_token);
+				localStorage.setItem('id_token', authHash.id_token);
 				if(authHash.profile) {
-					localStorage.setItem('userId', authHash.profile.sub.split("|")[1]);
+					localStorage.setItem('user_id', authHash.profile.sub.split("|")[1]);
 				}
 			}
 			if (authHash.error) {
@@ -36,29 +36,21 @@ class App extends React.Component {
 	}  
 
 	render() {
-
-		if(this.state.idToken) {
-			let childrenWithProps  = React.Children.map(this.props.children, (child) => {
-				return React.cloneElement(child, {idToken: this.state.idToken});
-			});
-
-			return (
-				<div className="main-container">
-					{childrenWithProps}
-				</div>
-			);
-		} else {
-			return (  
-				<div className="main-container">
-					<Login lock={this.lock}/>
-				</div>
-			);
-		}
-		
+		return (
+			<div className="main-container">
+				{this.props.children}
+			</div>
+		);
 	}
 }
 
 App.path = '/';
 
-export default App;
+const mapStateToProps = (state) => {
+	return {
+		authorized: state.authorized
+	}
+}
+
+export default connect(mapStateToProps)(App);
 

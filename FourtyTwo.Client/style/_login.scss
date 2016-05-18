@@ -1,6 +1,4 @@
 $headerBgColor: #66BB6A;
-@import 'auth0lock';
-
 
 .login-header {
 	// margin-top: 15em;
@@ -12,7 +10,7 @@ $headerBgColor: #66BB6A;
 	height: 400px;
 	margin-bottom:30px;
 	vertical-align: middle;
-	text-align: right;
+	text-align: center;
 	padding-top: 80px;
 	
 	.heading-wrapper {

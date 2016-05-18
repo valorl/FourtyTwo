@@ -1,4 +1,7 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { browserHistory } from 'react-router';
+
 import HeaderBar from './header-bar';
 import QuestionPanel from '../components/question-panel';
 import QuestionStatsPanel from '../components/question-stats-panel';
@@ -9,7 +12,9 @@ import RaisedButton from 'material-ui/lib/raised-button';
 import Play42 from '../utils/play42-helper.js';
 import PlayTimer from '../utils/play-timer.js';
 
-import { PLAY_CONFIG } from '../config.js';
+import { postExercise } from '../actions/index';
+
+import { PLAY_CONFIG } from '../config';
 
 
 
@@ -32,11 +37,12 @@ class Play extends React.Component {
     this.handleStoreQuestion = this.handleStoreQuestion.bind(this);
     this.handleDialogClose = this.handleDialogClose.bind(this);
     this.handleTimerTick = this.handleTimerTick.bind(this);
+    this.handleTimerExpired = this.handleTimerExpired.bind(this);
   }
 
   componentDidMount() {
-
   }
+
   handleStoreQuestion(question) {
     let { questions } = this.state;
 
@@ -83,7 +89,16 @@ class Play extends React.Component {
   }
 
   handleTimerExpired() {
+    const { score, questions, userId, accuracy } = this.state;
+
+    this.props.postExercise({
+      score,
+      questions,
+      userId,
+      accuracy
+    });
     console.log('Time expired!');
+
     // Save exercise - API call
   }
 
@@ -130,7 +145,11 @@ class Play extends React.Component {
 
 Play.path = "/play";
 
-export default Play;
+// function mapDispatchToProps(dispatch) {
+//   return bindActionCreators({fetchPosts}, dispatch);
+// }
+
+export default connect(null, { postExercise })(Play);
 
 
 

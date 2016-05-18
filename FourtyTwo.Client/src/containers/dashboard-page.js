@@ -1,5 +1,9 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { browserHistory } from 'react-router';
 import HeaderBar from './header-bar';
+import { logout } from '../actions';
+
 
 class DashboardPage extends React.Component {
   render() {
@@ -8,7 +12,7 @@ class DashboardPage extends React.Component {
       		<div className="dashboard-container">
       			<p>{this.props.idToken}</p>
   
-      			<button onClick={() =>  { localStorage.removeItem('userToken'); this.props.history.push('/');}}>
+      			<button onClick={() =>  {this.props.dispatch(logout())}}>
       				LOGOUT
       			</button>
       		</div>
@@ -19,7 +23,7 @@ class DashboardPage extends React.Component {
 
 DashboardPage.path = "/dashboard";
 
-export default DashboardPage;
+export default connect()(DashboardPage);
 
 
 

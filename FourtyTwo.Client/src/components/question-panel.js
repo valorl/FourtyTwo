@@ -59,8 +59,7 @@ class QuestionPanel extends React.Component {
   	let operation = math.pickRandom(operationTypes);
 
   	const currentQuestion = {
-  		n1: n1,
-  		n2: n2,
+  		numbers: [n1, n2],
   		operation: operation,
   		evaluate: () => math.eval(`${n1} + ${n2}`),
   		answer: ''
@@ -91,8 +90,8 @@ class QuestionPanel extends React.Component {
   }
 
   handleInputChanged(event) {
-    console.log(/(^[0-9]+$|^$)/.test(event.target.value));
-    if(/(^[0-9]+$|^$)/.test(event.target.value)) {
+    console.log(/^(\+|-)?\d+$|^(\+|-)$|^$/.test(event.target.value));
+    if(/^(\+|-)?\d+$|^(\+|-)$|^$/.test(event.target.value)) {
       this.setState({inputValue: event.target.value});
     }
     else return false;
@@ -117,9 +116,9 @@ class QuestionPanel extends React.Component {
       		<Paper style={this.styles.mainPaper} zDepth={1}>
   	    		<div>
               <div className="question-expression">
-                <span className="question-number">{currentQuestion ? currentQuestion.n1 : '..4'}</span>
+                <span className="question-number">{currentQuestion ? currentQuestion.numbers[0] : '..4'}</span>
                 <span className="question-operation"> {currentQuestion ? currentQuestion.operation.sign : '.'} </span>
-                <span className="question-number">{currentQuestion ? currentQuestion.n2 : '2..'}</span>
+                <span className="question-number">{currentQuestion ? currentQuestion.numbers[1] : '2..'}</span>
               </div>
               <form onSubmit={this.handleAnswerSubmitted}>
                 <TextField 
