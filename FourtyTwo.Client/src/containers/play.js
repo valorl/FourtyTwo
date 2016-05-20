@@ -38,9 +38,7 @@ class Play extends React.Component {
     this.handleDialogClose = this.handleDialogClose.bind(this);
     this.handleTimerTick = this.handleTimerTick.bind(this);
     this.handleTimerExpired = this.handleTimerExpired.bind(this);
-  }
-
-  componentDidMount() {
+    console.log("play constructor");
   }
 
   handleStoreQuestion(question) {
@@ -120,14 +118,14 @@ class Play extends React.Component {
             	<QuestionPanel ref="QuestionPanel" handleStoreQuestion={this.handleStoreQuestion}/>
       		</div>
       		<div className="col-sm-4">
-      			<QuestionStatsPanel 
-              timeLeft={this.state.time} 
-              answeredCount={this.state.questions.length} 
+      			<QuestionStatsPanel
+              timeLeft={this.state.time}
+              answeredCount={this.state.questions.length}
               incorrectCount={this.state.score > -1 ? this.state.questions.length - this.state.score : 0}
               accuracy={this.state.accuracy} />
       		</div>
 
-          <Dialog 
+          <Dialog
             title="Are you ready?"
             actions={actions}
             modal={true}
@@ -150,6 +148,3 @@ Play.path = "/play";
 // }
 
 export default connect(null, { postExercise })(Play);
-
-
-

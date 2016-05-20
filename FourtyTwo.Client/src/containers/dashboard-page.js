@@ -11,9 +11,12 @@ class DashboardPage extends React.Component {
     	<div>
       		<div className="dashboard-container">
       			<p>{this.props.idToken}</p>
-  
+
       			<button onClick={() =>  {this.props.dispatch(logout())}}>
       				LOGOUT
+      			</button>
+            <button onClick={() =>  {browserHistory.push('/app/play')}}>
+      				PLAY
       			</button>
       		</div>
     	</div>
@@ -24,6 +27,3 @@ class DashboardPage extends React.Component {
 DashboardPage.path = "/dashboard";
 
 export default connect()(DashboardPage);
-
-
-

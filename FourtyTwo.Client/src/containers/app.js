@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
+import { rehydrateAuth } from '../actions';
 
 import Auth0Lock from 'auth0-lock';
 
@@ -9,9 +10,11 @@ import Authorized from './authorized';
 class App extends React.Component {
 
 	componentWillMount() {
-		let redirect = '';
-		this.props.authorized ? redirect = '/app' :  redirect = '/login';
-		browserHistory.push(redirect);
+		this.props.rehydrateAuth();
+		// let redirect = null;
+		// console.log(this.props.authenticated);
+		// this.props.authenticated ? redirect = '/app' : redirect = '/login';
+		// browserHistory.push(redirect);
 	}
 
 
@@ -33,7 +36,7 @@ class App extends React.Component {
 			}
 		}
 		return idToken;
-	}  
+	}
 
 	render() {
 		return (
@@ -48,9 +51,8 @@ App.path = '/';
 
 const mapStateToProps = (state) => {
 	return {
-		authorized: state.authorized
+		authenticated: state.authenticated
 	}
 }
 
-export default connect(mapStateToProps)(App);
-
+export default connect(mapStateToProps, { rehydrateAuth })(App);

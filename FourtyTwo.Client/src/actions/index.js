@@ -1,4 +1,4 @@
-import { 
+import {
 	SET_IS_LOADING,
 	FETCH_EXERCISES,
 	STORE_EXERCISES,
@@ -30,7 +30,7 @@ export const login = () => {
 	return dispatch => {
 		lock.showSignin(options, (err,profile,token) => {
 			if(err) {
-				dispatch(lockError(error));
+				authError(error);
 				return
 			}
 			localStorage.setItem('profile', JSON.stringify(profile));
@@ -55,7 +55,26 @@ export const logout = () => {
 	}
 }
 
+export const rehydrateAuth = () => {
+	return dispatch => {
+		const token = localStorage.getItem('id_token');
+		const profile = localStorage.getItem('profile');
+		if(!token) {
+			authError('Rehydrate auth: no token.');
+			return
+		}
+		if(!profile) {
+			authError('Rehydrate auth: no token no profile');
+			return
+		}
+		dispatch(lockSuccess(profile,token));
+	}
+}
+
 export const lockSuccess = (profile,token) => {
+	console.log('lockSuccess action start');
+	console.log(profile);
+	console.log(token);
 	setRoute('/app/dashboard');
 	return {
 		type: LOCK_SUCCESS,
@@ -64,18 +83,15 @@ export const lockSuccess = (profile,token) => {
 	}
 }
 
-export const lockError = (error) => {
-	console.log('lockError called with:');
-	console.log(error);
-}
+
 
 // API CALLS
 export const postExercise = (exercise) => {
 	return dispatch => {
 		dispatch(setIsLoading(true));
 		return Api42.postExercise(exercise).then(
-			newExercise => { 
-				console.log(newExercise.data); 
+			newExercise => {
+				console.log(newExercise.data);
 				dispatch(setIsLoading(false));
 				setRoute('/dashboard');
 			},
@@ -88,7 +104,6 @@ export const postExercise = (exercise) => {
 	}
 }
 
-
 // HELPER ACTIONS
 export const setIsLoading = (flag) => {
 	return {
@@ -97,9 +112,12 @@ export const setIsLoading = (flag) => {
 	}
 }
 
-
-
 // private
 const setRoute = (route) => {
 	browserHistory.push(route);
+}
+const authError = (error) => {
+	setRoute('/login');
+	console.log('authError called with:');
+	console.log(error);
 }
