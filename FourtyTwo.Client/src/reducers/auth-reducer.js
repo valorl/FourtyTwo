@@ -7,9 +7,8 @@ const INITIAL_STATE = {
 const auth = (state = INITIAL_STATE, action) => {
 	switch(action.type) {
 		case LOCK_SUCCESS:
-			console.log('case SET_IS_LOADING');
 			return { 
-				...state, 
+				...state,
 				authenticated:true,
 				idToken: action.token,
 				profile: action.profile

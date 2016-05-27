@@ -1,0 +1,36 @@
+.history-list-item {
+  height: 40px;
+  padding:10px;
+  font-size: 16px;
+  cursor: pointer;
+  cursor: hand;
+
+  &:hover {
+    background-color: #C8E6C9;
+  }
+  &:active, .selected {
+    background-color: #A5D6A7;
+  }
+
+
+  .hli-left, .hli-right {
+    display:inline-block;
+  }
+  .hli-right {
+    float:right;
+    div {
+      display: inline-block;
+    }
+  }
+
+  .arrow {
+    margin:0 5px;
+  }
+
+  .fa-caret-down {
+    color: #e53935;
+  }
+  .fa-caret-up {
+    color: #43A047;
+  }
+}

@@ -1,7 +1,7 @@
 import {
 	SET_IS_LOADING,
-	FETCH_EXERCISES,
 	STORE_EXERCISES,
+	STORE_CURRENT_EXERCISE,
 	SHOW_LOCK,
 	LOCK_SUCCESS,
 	LOCK_ERROR,
@@ -58,7 +58,7 @@ export const logout = () => {
 export const rehydrateAuth = () => {
 	return dispatch => {
 		const token = localStorage.getItem('id_token');
-		const profile = localStorage.getItem('profile');
+		const profile = JSON.parse(localStorage.getItem('profile'));
 		if(!token) {
 			authError('Rehydrate auth: no token.');
 			return
@@ -96,11 +96,42 @@ export const postExercise = (exercise) => {
 				setRoute('/dashboard');
 			},
 			error => {
-				console.log('error');
+				console.log('postExercise error:');
 				console.log(error);
 				dispatch(setIsLoading(false));
 			}
 		);
+	}
+}
+
+export const requestExercises = () => {
+	return dispatch => {
+		dispatch(setIsLoading(true));
+		return Api42.getExercises().then(
+			exercises => {
+				console.log(exercises.data);
+				dispatch(setIsLoading(false));
+				dispatch(storeExercises(exercises.data));
+			},
+			error => {
+				dispatch(setIsLoading(false));
+				console.log('requestExercises error:');
+				console.log(error);
+			}
+		);
+	}
+}
+// STORE actions
+export const storeExercises = (exercises) => {
+	return {
+		type: STORE_EXERCISES,
+		exercises
+	}
+}
+export const storeCurrentExercise = (exercise) => {
+	return {
+		type: STORE_CURRENT_EXERCISE,
+		exercise
 	}
 }
 

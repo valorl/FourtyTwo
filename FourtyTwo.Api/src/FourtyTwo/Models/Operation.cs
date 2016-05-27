@@ -10,7 +10,7 @@ namespace FourtyTwo.Models
     public class Operation
     {
         [DataMember(Name = "sign")]
-        public string Sign { get; set; }
+        public char Sign { get; set; }
         [DataMember(Name = "type")]
         public string Type { get; set; }
     }

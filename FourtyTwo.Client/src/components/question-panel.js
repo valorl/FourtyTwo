@@ -15,7 +15,7 @@ class QuestionPanel extends React.Component {
   	this.handleInputChanged = this.handleInputChanged.bind(this);
 
   }
-  
+
   componentWillMount() {
   	this.setState({
       inputValue: '',
@@ -78,14 +78,14 @@ class QuestionPanel extends React.Component {
     this.props.handleStoreQuestion(currentQuestion);
 
     if(currentQuestion.answer) {
-      this.setState({ 
+      this.setState({
       currentQuestion: Play42.randomQuestion(),
       inputValue: '',
       });
     }
 
 
-  	
+
   	// this.setState({ inputValue: 'refreshed' + math.randomInt(5)});
   }
 
@@ -107,7 +107,7 @@ class QuestionPanel extends React.Component {
   setTextFieldFocus() {
     this.refs.TextField.focus();
   }
-  
+
   render() {
   	const { currentQuestion } = this.state;
 
@@ -121,20 +121,20 @@ class QuestionPanel extends React.Component {
                 <span className="question-number">{currentQuestion ? currentQuestion.numbers[1] : '2..'}</span>
               </div>
               <form onSubmit={this.handleAnswerSubmitted}>
-                <TextField 
+                <TextField
                   ref="TextField"
-                  style={this.styles.textField} 
+                  style={this.styles.textField}
                   inputStyle={this.styles.textFieldInput}
                   hintStyle={this.styles.textFieldHint}
-                  hintText="Answer here" 
-                  value={this.state.inputValue} 
+                  hintText="Answer here"
+                  value={this.state.inputValue}
                   onChange={this.handleInputChanged}
                   autoComplete="off"/>
               {/*<RaisedButton label="Answer" labelColor="white" backgroundColor="#66BB6A"/>*/}
               </form>
 
   	    		</div>
-      			
+
       		</Paper>
       	</div>
 
@@ -143,6 +143,3 @@ class QuestionPanel extends React.Component {
 }
 
 export default QuestionPanel;
-
-
-

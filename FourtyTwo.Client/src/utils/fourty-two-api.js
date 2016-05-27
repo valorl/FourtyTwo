@@ -1,14 +1,10 @@
 import axios from 'axios';
 import { API_HOSTNAME } from '../config';
 
-const _idToken = localStorage.getItem('id_token');
-const _userId = localStorage.getItem('user_id');
-
 class Api42	 {
-	static get idToken() { return _idToken };
-	static get userId() { return _userId };
-	static get config() { 
-		return { 
+	static get idToken() { return localStorage.getItem('id_token'); };
+	static get config() {
+		return {
 			headers: {
 				'Authorization': `Bearer ${this.idToken}`
 			}
@@ -23,6 +19,10 @@ class Api42	 {
 		props.forEach(p => {
 			if (!exercise.hasOwnProperty(p)) throw `ExerciseModelInvalidException: property '${p}' missing`;
 		});
+	}
+
+	static getExercises() {
+		return axios.get(API_HOSTNAME + 'exercises', this.config);
 	}
 
 	static postExercise(exercise) {

@@ -15,13 +15,11 @@ class Authorized extends React.Component {
   		}
   	}
   }
-  componentDidMount() {
-  	this.dispatch = this.props.dispatch;
-  }
+
   render() {
     return (
     	<div>
-          <HeaderBar />
+          <HeaderBar profile={this.props.profile}/>
           {this.props.isLoading ? <LinearProgress mode="indeterminate" style={this.styles.linearProgress}/> : null}
           {this.props.children}
     	</div>
@@ -31,13 +29,11 @@ class Authorized extends React.Component {
 
 Authorized.path = "/";
 
-const mapStateToProps = (state) => { 
+const mapStateToProps = (state) => {
 	return {
-		isLoading: state.isLoading
+		isLoading: state.loading.isLoading,
+    profile: state.auth.profile
 	}
-}	
+}
 
 export default connect(mapStateToProps)(Authorized);
-
-
-

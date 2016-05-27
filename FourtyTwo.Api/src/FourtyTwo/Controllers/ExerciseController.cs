@@ -7,7 +7,6 @@ using FourtyTwo.Models;
 using Microsoft.AspNet.Authorization;
 using FourtyTwo.Repositories;
 using System.Security.Claims;
-using FourtyTwo.Models.Enums;
 
 namespace FourtyTwo.Controllers
 {
@@ -63,7 +62,11 @@ namespace FourtyTwo.Controllers
             //        new Question()
             //        {
             //            Numbers = { 21, 21 },
-            //            Operation = Operation.Addition
+            //            Operation = new Operation()
+            //            {
+            //                Sign = '+',
+            //                Type = "addition"
+            //            }
             //        }
             //    },
             //};

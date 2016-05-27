@@ -7,9 +7,6 @@ import DashboardPage from './containers/dashboard-page';
 import Login from './containers/login';
 import PlayPage from './containers/play';
 
-
-
-
 export default (
 	<Route path="/" component={App}>
 		<Route path="app" component={Authorized}>
