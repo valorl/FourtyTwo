@@ -14,7 +14,7 @@ import {green600, grey600} from 'material-ui/lib/styles/colors';
 
 
 
-export default class HeaderBar extends React.Component {
+class HeaderBar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -52,6 +52,10 @@ export default class HeaderBar extends React.Component {
   	}
   }
 
+  handleItemClicked(callback) {
+    this.setState({open: false},callback);
+  }
+
   renderNav() {
     return (
       <LeftNav
@@ -70,10 +74,23 @@ export default class HeaderBar extends React.Component {
             <p>{this.props.profile.email}</p>
           </div>
         </div>
-        <MenuItem leftIcon={<DashboardIcon color={green600}/>}>Dashboard</MenuItem>
-        <MenuItem leftIcon={<PlayIcon color={green600}/>}>Practice</MenuItem>
+        <MenuItem
+          leftIcon={<DashboardIcon color={green600}/>}
+          onTouchTap={() => this.handleItemClicked(this.props.handleDashboard)}
+          >
+          Dashboard
+        </MenuItem>
+        <MenuItem
+          leftIcon={<PlayIcon color={green600}/>}
+          onTouchTap={() => this.handleItemClicked(this.props.handlePractice)}>
+          Practice
+        </MenuItem>
         <Divider/>
-        <MenuItem leftIcon={<LogoutIcon color={grey600}/>}>Logout</MenuItem>
+        <MenuItem
+          leftIcon={<LogoutIcon color={grey600}/>}
+          onTouchTap={() => this.handleItemClicked(this.props.handleLogout)}>
+          Logout
+        </MenuItem>
       </LeftNav>
     );
   }
@@ -103,3 +120,5 @@ export default class HeaderBar extends React.Component {
     );
   }
 }
+
+export default HeaderBar;

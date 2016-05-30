@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { setIsLoading } from '../actions';
+import { browserHistory } from 'react-router';
+import { logout } from '../actions';
 
 import HeaderBar from './header-bar';
 import LinearProgress from 'material-ui/lib/linear-progress';
@@ -14,12 +15,30 @@ class Authorized extends React.Component {
   			backgroundColor: 'transparent'
   		}
   	}
+
+    this.handleDashboardClicked = this.handleDashboardClicked.bind(this);
+    this.handlePracticeClicked = this.handlePracticeClicked.bind(this);
+    this.handleLogoutClicked = this.handleLogoutClicked.bind(this);
+  }
+
+  handleDashboardClicked() {
+    browserHistory.push('/app/dashboard');
+  }
+  handlePracticeClicked() {
+    browserHistory.push('/app/play');
+  }
+  handleLogoutClicked() {
+    this.props.logout();
   }
 
   render() {
     return (
     	<div>
-          <HeaderBar profile={this.props.profile}/>
+          <HeaderBar
+            profile={this.props.profile}
+            handleDashboard={this.handleDashboardClicked}
+            handlePractice={this.handlePracticeClicked}
+            handleLogout={this.handleLogoutClicked}/>
           {this.props.isLoading ? <LinearProgress mode="indeterminate" style={this.styles.linearProgress}/> : null}
           {this.props.children}
     	</div>
@@ -36,4 +55,4 @@ const mapStateToProps = (state) => {
 	}
 }
 
-export default connect(mapStateToProps)(Authorized);
+export default connect(mapStateToProps, { logout })(Authorized);

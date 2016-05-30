@@ -41,18 +41,30 @@ class DashboardPage extends React.Component {
     this.props.storeCurrentExercise(exercise);
   }
 
+  renderHistory(exercises) {
+    return (
+      <div className="col-sm-6 card">
+        <HistoryList exercises={exercises}
+          handleExerciseClicked={this.handleExerciseClicked}/>
+      </div>
+    );
+  }
+
+  renderDetails(currentExercise) {
+    return (
+      <div className="col-sm-6 card">
+        <DetailsTable
+          questions={currentExercise ? currentExercise.questions : null} />
+      </div>
+    );
+  }
+
   render() {
     const { exercises, currentExercise } = this.props;
     return (
       <div className="dashboard-container container-fluid">
-        <div className="col-sm-6 card">
-          <HistoryList exercises={exercises}
-            handleExerciseClicked={this.handleExerciseClicked}/>
-        </div>
-        <div className="col-sm-6 card">
-          <DetailsTable
-            questions={currentExercise ? currentExercise.questions : null} />
-        </div>
+        {this.renderHistory(exercises)}
+        {this.renderDetails(currentExercise)}
         <FloatingActionButton
           backgroundColor={red600}
           style={this.state.styles.fab}

@@ -5,7 +5,7 @@ import {Table, TableRow, TableRowColumn,
 import Play42 from '../utils/play42-helper.js';
 import Correct from 'material-ui/lib/svg-icons/action/done';
 import Incorrect from 'material-ui/lib/svg-icons/navigation/close';
-import {red600, green600} from 'material-ui/lib/styles/colors';
+import {red600, green600, grey600} from 'material-ui/lib/styles/colors';
 
 
 class DetailsTable extends React.Component {
@@ -37,28 +37,51 @@ class DetailsTable extends React.Component {
     return(
       <Card cssClass="card-root">
         <CardTitle title="Details" />
-        <CardText className="card-content" style={{padding: 10}}>
-          <Table
-            className="details-table"
-            selectable={false}
-            fixedHeader={true}
-            height="350">
-            <TableHeader
-              displaySelectAll={false}
-              adjustForCheckbox={false}>
-              <TableRow>
-                <TableHeaderColumn></TableHeaderColumn>
-                <TableHeaderColumn>Question</TableHeaderColumn>
-                <TableHeaderColumn>Answer</TableHeaderColumn>
-              </TableRow>
-            </TableHeader>
-            <TableBody
-              displayRowCheckbox={false}
-              showRowHover={true}>
-              {rows}
-            </TableBody>
-          </Table>
-        </CardText>
+        { rows ?
+          <CardText className="card-content" style={{padding: 10}}>
+              <Table
+                className="details-table"
+                selectable={false}
+                fixedHeader={true}
+                height="350">
+                <TableHeader
+                  displaySelectAll={false}
+                  adjustForCheckbox={false}>
+                  <TableRow>
+                    <TableHeaderColumn></TableHeaderColumn>
+                    <TableHeaderColumn>Question</TableHeaderColumn>
+                    <TableHeaderColumn>Answer</TableHeaderColumn>
+                  </TableRow>
+                </TableHeader>
+                <TableBody
+                  displayRowCheckbox={false}
+                  showRowHover={true}>
+                  {rows}
+                </TableBody>
+              </Table>
+          </CardText>
+          :
+          <CardText
+            className="card-content"
+            style={{
+              width: '100%',
+              display: 'table',
+              textAlign: 'center',
+              padding: 10,
+              height: 300,
+              maxHeight: 400}}>
+            <div
+              style= {{
+                display: 'table-cell',
+                verticalAlign: 'middle',
+                color: grey600
+              }}>
+              <i>Please select a practice from 'Practice History'.</i>
+            </div>
+          </CardText>
+        }
+
+      }
       </Card>
     );
   }
