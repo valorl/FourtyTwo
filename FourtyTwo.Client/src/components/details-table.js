@@ -35,10 +35,11 @@ class DetailsTable extends React.Component {
     const rows = this.props.questions ? this.renderRows() : null;
 
     return(
-      <Card cssClass="card-root">
-        <CardTitle title="Details" />
+      <Card cssClass="card-root" zDepth={1}>
+        {/*<CardTitle title="Details" />*/}
         { rows ?
-          <CardText className="card-content" style={{padding: 10}}>
+          <CardText className="card-content"
+            style={{padding: '0 10px'}}>
               <Table
                 className="details-table"
                 selectable={false}
@@ -68,7 +69,7 @@ class DetailsTable extends React.Component {
               display: 'table',
               textAlign: 'center',
               padding: 10,
-              height: 300,
+              height: 400,
               maxHeight: 400}}>
             <div
               style= {{

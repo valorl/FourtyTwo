@@ -93,7 +93,7 @@ export const postExercise = (exercise) => {
 			newExercise => {
 				console.log(newExercise.data);
 				dispatch(setIsLoading(false));
-				setRoute('/dashboard');
+				setRoute('/app/dashboard');
 			},
 			error => {
 				console.log('postExercise error:');

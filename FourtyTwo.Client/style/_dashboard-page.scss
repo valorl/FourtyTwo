@@ -1,6 +1,9 @@
 @import 'app-bar';
 @import 'history-list';
 @import 'details-table';
+body {
+  background-color: #ECEFF1;
+}
 .dashboard-container {
-  padding: 50px;
+  padding: 10px 50px 50px 50px;
 }

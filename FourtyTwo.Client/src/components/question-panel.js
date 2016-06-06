@@ -10,10 +10,8 @@ class QuestionPanel extends React.Component {
 
   constructor(props) {
   	super(props);
-  	this.generateQuestion = this.generateQuestion.bind(this);
   	this.handleAnswerSubmitted = this.handleAnswerSubmitted.bind(this);
   	this.handleInputChanged = this.handleInputChanged.bind(this);
-
   }
 
   componentWillMount() {
@@ -48,26 +46,6 @@ class QuestionPanel extends React.Component {
   	console.log(this.state);
   }
 
-  generateQuestion() {
-  	const operationTypes = [
-  		{ sign: '+', type: 'addition'},
-  		{ sign: '-', type: 'substraction'}
-  	];
-
-  	let n1 = math.round(math.randomInt(100));
-  	let n2 = math.round(math.randomInt(100));
-  	let operation = math.pickRandom(operationTypes);
-
-  	const currentQuestion = {
-  		numbers: [n1, n2],
-  		operation: operation,
-  		evaluate: () => math.eval(`${n1} + ${n2}`),
-  		answer: ''
-  	}
-
-  	return currentQuestion;
-  }
-
   handleAnswerSubmitted(event) {
     event.preventDefault();
 
@@ -77,16 +55,12 @@ class QuestionPanel extends React.Component {
     console.log(currentQuestion);
     this.props.handleStoreQuestion(currentQuestion);
 
-    if(currentQuestion.answer) {
+    if(currentQuestion.answer || currentQuestion.answer === 0) {
       this.setState({
       currentQuestion: Play42.randomQuestion(),
       inputValue: '',
       });
     }
-
-
-
-  	// this.setState({ inputValue: 'refreshed' + math.randomInt(5)});
   }
 
   handleInputChanged(event) {

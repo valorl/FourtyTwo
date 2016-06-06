@@ -29,6 +29,11 @@ namespace FourtyTwo.Models
         [DataMember(Name = "accuracy")]
         [Required]
         public int Accuracy { get; set; }
+        [DataMember(Name = "accuracyArrow")]
+        public int AccuracyArrow { get; set; }
+        [DataMember(Name = "scoreArrow")]
+        public int ScoreArrow { get; set; }
+
 
         public Exercise()
         {

@@ -1,6 +1,6 @@
 import React from 'react';
 import {Card, CardTitle, CardText} from 'material-ui/lib/card';
-import { grey600 } from 'material-ui/lib/styles/colors';
+import { grey600, grey800 } from 'material-ui/lib/styles/colors';
 import HistoryListItem from './history-list-item';
 
 class HistoryList extends React.Component {
@@ -24,12 +24,14 @@ class HistoryList extends React.Component {
       : null;
 
     return(
-      <Card cssClass="card-root">
-        <CardTitle title="Practice history" />
+      <Card cssClass="card-root" zDepth={1}>
+        <CardTitle title="Practice history"
+          style={{height:50, padding: 10, textAlign: 'center'}}
+          titleColor={grey800}/>
         { list ?
           <CardText
             className="card-content"
-            style={{padding: 10, height: 300, maxHeight: 400}}>
+            style={{padding: 10, height: 350, maxHeight: 350}}>
             {list}
           </CardText>
           :
@@ -40,8 +42,8 @@ class HistoryList extends React.Component {
               display: 'table',
               textAlign: 'center',
               padding: 10,
-              height: 300,
-              maxHeight: 400}}>
+              height: 350,
+              maxHeight: 350}}>
             <div
               style= {{
                 display: 'table-cell',

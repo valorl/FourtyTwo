@@ -7,11 +7,24 @@ const INITIAL_STATE = {
 const auth = (state = INITIAL_STATE, action) => {
 	switch(action.type) {
 		case LOCK_SUCCESS:
-			return { 
+			return {
 				...state,
 				authenticated:true,
 				idToken: action.token,
 				profile: action.profile
+			}
+		default:
+			return state;
+	}
+}
+
+
+function(state, action) => {
+	switch(action.type) {
+		case "ADD_CALENDAR_ENTRY":
+			return {
+				...state,
+				calendarEntries: [...state.calendarEntries, action.newCalendarEntry]
 			}
 		default:
 			return state;

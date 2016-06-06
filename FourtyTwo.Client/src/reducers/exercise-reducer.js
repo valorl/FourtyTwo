@@ -1,10 +1,8 @@
 import { STORE_EXERCISES, STORE_CURRENT_EXERCISE } from '../actions/consts';
-
 const INITIAL_STATE = {
 	exercises: [],
   currentExercise: null
 }
-
 const exercise = (state = INITIAL_STATE, action) => {
 	switch(action.type) {
 		case STORE_EXERCISES:
@@ -21,5 +19,4 @@ const exercise = (state = INITIAL_STATE, action) => {
 			return state;
 	}
 }
-
 export default exercise;

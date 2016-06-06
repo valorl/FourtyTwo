@@ -1,17 +1,49 @@
 import HighChart from 'react-highcharts';
+import HighchartsMore from 'highcharts-more'
+import hcConfig from '../utils/highcharts-config';
+import React from 'react';
+import Paper from 'material-ui/lib/Paper';
+import moment from 'moment';
+import _ from 'lodash';
 
-Math.easeOutQuart = (t) => { return 1-(--t)*t*t*t };
+HighchartsMore(HighChart.Highcharts);
 
 class PerformanceChart extends React.Component {
-  constructor({ scores, accuracies }) {
-    this.config = {
-
-    }
-  }
-
 	render() {
+    console.log(this.props);
+    const exercises = _.sortBy(this.props.exercises, ex => ex.timeStamp);
+
+    const scores = exercises.map(ex => {
+      return ex.score;
+    });
+
+    const accuracies = exercises.map(ex => {
+      return ex.accuracy;
+    });
+    console.log({ scores, accuracies });
+
+    const config = {
+      ...hcConfig,
+      series: [{
+        name: 'Score',
+        yAxis: 0,
+        data: scores
+      },
+      {
+        name: 'Accuracy',
+        yAxis: 1,
+        data: accuracies
+      }]
+    }
+
+    console.log(config);
+
 		return (
-			<HighChart config={this.config} />
+      <Paper rounded={true} style={{marginBottom: 15, padding: 5}} zDepth={1}>
+        <HighChart config={config} />
+      </Paper>
 		);
 	}
 }
+
+export default PerformanceChart;

@@ -4,8 +4,6 @@ import PlayTimer from './play-timer.js';
 import { PLAY_CONFIG } from '../config.js';
 
 class Play42Helper {
-	static get operationTypes() { return _operationTypes }
-
 	static randomQuestion() {
 		let n1 = math.round(math.randomInt(PLAY_CONFIG.MIN_NUMBER,PLAY_CONFIG.MAX_NUMBER));
 		let n2 = math.round(math.randomInt(PLAY_CONFIG.MIN_NUMBER,PLAY_CONFIG.MAX_NUMBER));
@@ -16,7 +14,6 @@ class Play42Helper {
 			operation: operation,
 			answer: ''
 		}
-
 		return question;
 	}
 
@@ -27,7 +24,7 @@ class Play42Helper {
 		if(!question) throw "InvalidParameterException in Play42 evaluate: 'question' parameter is undefined";
 		if(!question.numbers) throw "InvalidParameterException in Play42 evaluate: 'question.numbers' is undefined";
 		if(!question.numbers.length > 0) throw "InvalidParameterException in Play42 evaluate: 'question.numbers' is empty";
-		if(!question.answer || question.answer.length < 1) throw "Play42 evaluate: No answer in 'question'";
+		if(question.answer.length < 1) throw "Play42 evaluate: No answer in 'question'";
 
 		const expr = question.numbers.join(question.operation.sign);
 
@@ -38,9 +35,9 @@ class Play42Helper {
 	static calculateAccuracy(questions) {
 		if(!questions || !questions.length >0) throw "NullOrEmptyArrayException (calculateAccuracy)";
 		const evaluateQuestion = Play42Helper.evaluateQuestion;
-		const accFloat = questions.filter(q => 
-			{ 
-				return evaluateQuestion(q); 
+		const accFloat = questions.filter(q =>
+			{
+				return evaluateQuestion(q);
 			}).length / questions.length * 100;
 		return math.round(accFloat);
 	}
@@ -49,9 +46,9 @@ class Play42Helper {
 		if(!questions || !questions.length >0) throw "NullOrEmptyArrayException (countCorrect)";
 
 		const evaluateQuestion = Play42Helper.evaluateQuestion;
-		return questions.filter(q => 
-			{ 
-				return evaluateQuestion(q); 
+		return questions.filter(q =>
+			{
+				return evaluateQuestion(q);
 			}).length;
 	}
 

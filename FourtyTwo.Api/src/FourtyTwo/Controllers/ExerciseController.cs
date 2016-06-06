@@ -7,6 +7,7 @@ using FourtyTwo.Models;
 using Microsoft.AspNet.Authorization;
 using FourtyTwo.Repositories;
 using System.Security.Claims;
+using FourtyTwo.Utils;
 
 namespace FourtyTwo.Controllers
 {
@@ -29,9 +30,10 @@ namespace FourtyTwo.Controllers
             if (userId == null) return HttpUnauthorized();
 
             var userExercises = await _repository.FindManyAsync(userId);
+
             if (userExercises == null || userExercises.ToList().Count < 1) return HttpNotFound();
 
-            return Ok(userExercises);
+            return Ok(ExerciseUpDownSetter.Set(userExercises));
         }
 
         // GET v1/api/exercises/5

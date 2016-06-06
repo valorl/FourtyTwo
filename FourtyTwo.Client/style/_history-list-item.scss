@@ -4,6 +4,8 @@
   font-size: 16px;
   cursor: pointer;
   cursor: hand;
+  border-radius: 3px;
+  transition: background-color 0.5s ease;
 
   &:hover {
     background-color: #C8E6C9;
@@ -12,14 +14,24 @@
     background-color: #A5D6A7;
   }
 
+  .hli-qpm {
+    width: 70px;
+  }
+  .hli-accuracy {
+    width: 50px;
+  }
 
   .hli-left, .hli-right {
     display:inline-block;
+    text-align: center;
   }
   .hli-right {
     float:right;
     div {
       display: inline-block;
+    }
+    span {
+      width: 15px;
     }
   }
 
@@ -32,5 +44,10 @@
   }
   .fa-caret-up {
     color: #43A047;
+  }
+  .fa-circle {
+    font-size: 9px;
+    margin: 0 5px;
+    color: #607D8B;
   }
 }

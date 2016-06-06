@@ -6,7 +6,9 @@
   "scripts": {
     "start": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js --progress --inline",
     "test": "mocha --compilers js:babel-core/register --require ./test/test_helper.js --recursive ./test",
-    "test:watch": "npm run test -- --watch"
+    "test:watch": "npm run test -- --watch",
+    "build:prod": "webpack --progress -p --config webpack.production.config.js && cp index.html dist/index.html",
+    "dist": "node ./lib/server.js"
   },
   "author": "",
   "license": "ISC",
@@ -42,6 +44,8 @@
     "auth0-lock": "^9.0.4",
     "axios": "^0.11.0",
     "bootstrap-css-only": "^3.3.6",
+    "express": "^4.13.4",
+    "highcharts-more": "^0.1.2",
     "lodash": "^3.10.1",
     "material-ui": "^0.14.4",
     "mathjs": "^3.2.0",

@@ -2,7 +2,7 @@ var path = require('path');
 var webpack = require('webpack');
 
 module.exports = {
-  devtool: 'eval',
+  devtool: 'cheap-module-source-map',
   entry: [
     'webpack/hot/only-dev-server',
     './src/index'
@@ -10,7 +10,6 @@ module.exports = {
     output: {
       path: path.join(__dirname, 'dist'),
       filename: 'bundle.js',
-      publicPath: '/static/'
     },
 
     module: {
@@ -51,6 +50,11 @@ module.exports = {
   },
   plugins: [
   new webpack.HotModuleReplacementPlugin(),
+  new webpack.DefinePlugin({
+    'process.env': {
+      'NODE_ENV': JSON.stringify('production')
+    }
+  })
   ],
   devServer: {
     historyApiFallback: true,
