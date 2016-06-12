@@ -25,11 +25,11 @@ class Login extends React.Component {
     		<div className="login-container">
 		    	<Paper className="login-header " zDepth={2} rounded={false} style={{backgroundColor: Colors.green400}}>
 			    	<div className="heading-wrapper col-md-12">
-						<h2>4ourty 2wo</h2>
+						<h2>4orty 2wo</h2>
 			    		<p>Fun way to practice arithmetics!</p>
-			    		<RaisedButton 
+			    		<RaisedButton
 					    	label="Try it out!"
-					    	backgroundColor={Colors.red400} 
+					    	backgroundColor={Colors.red400}
 					    	style={this.styles.button}
 					    	labelColor="#fff"
 					    	onClick={this.props.login}
@@ -37,7 +37,7 @@ class Login extends React.Component {
 			    	</div>
 
 	    		</Paper>
-    			
+
     		</div>
     	);
   	}

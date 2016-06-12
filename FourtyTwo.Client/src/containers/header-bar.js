@@ -101,7 +101,7 @@ class HeaderBar extends React.Component {
         <AppBar
         	className="header-bar"
         	style={this.styles.appBar}
-        	title={<span className="app-bar-text">4ourty 2wo</span>}
+        	title={<span className="app-bar-text">4orty 2wo</span>}
           onLeftIconButtonTouchTap={() => this.setState({open: !this.state.open})}
           iconElementRight={
             <a href="https://github.com/valorl/FourtyTwo" target="_blank">

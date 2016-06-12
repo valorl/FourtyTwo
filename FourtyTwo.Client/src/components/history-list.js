@@ -31,7 +31,11 @@ class HistoryList extends React.Component {
         { list ?
           <CardText
             className="card-content"
-            style={{padding: 10, height: 350, maxHeight: 350}}>
+            style={{
+              padding: 10,
+              height: 350,
+              maxHeight: 350,
+              overflowY: 'scroll'}}>
             {list}
           </CardText>
           :
