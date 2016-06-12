@@ -9,7 +9,7 @@ namespace FourtyTwo.Utils
     public static class ExerciseUpDownSetter
     {
         public static IEnumerable<Exercise> Set(IEnumerable<Exercise> exercises)
-        {
+       {
             var list = exercises.OrderBy(ex => ex.TimeStamp).ToList();
             for(int i=0; i < exercises.Count(); i++)
             {

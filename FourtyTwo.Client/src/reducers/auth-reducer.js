@@ -18,17 +18,4 @@ const auth = (state = INITIAL_STATE, action) => {
 	}
 }
 
-
-function(state, action) => {
-	switch(action.type) {
-		case "ADD_CALENDAR_ENTRY":
-			return {
-				...state,
-				calendarEntries: [...state.calendarEntries, action.newCalendarEntry]
-			}
-		default:
-			return state;
-	}
-}
-
 export default auth;

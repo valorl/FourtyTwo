@@ -132,8 +132,8 @@ class Play extends React.Component {
             open={this.state.dialogOpen}
             onRequestClose={this.handleDialogClose}
           >
-            <p> In the following exercise, you will have 2 minutes to complete as many questions as possible.
-            The questions consist of two randomly generated numbers between 0 and 100 that are supposed to be either added together or substracted.<br/><br/>
+            <p> In the following exercise, you will have 1 minute to complete as many questions as possible.
+            The questions consist of two randomly generated numbers between 10 and 100 that are supposed to be either added together or subtracted.<br/><br/>
              To begin the exercise session, start the timer by pressing PLAY.</p>
           </Dialog>
     	</div>
